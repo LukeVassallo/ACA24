@@ -1,6 +1,6 @@
 CC = gcc
-NUM_THREADS ?= 4
-CFLAGS = -Wall -Wextra -O3 -DNUM_THREADS=$(NUM_THREADS)
+NUM_THREADS ?= 8
+CFLAGS = -Wall -Wextra -DNUM_THREADS=$(NUM_THREADS)
 LDFLAGS = -lpthread
 
 BIN = main 
