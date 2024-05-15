@@ -1,13 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+#include <stdio.h>      // Required for printf
+#include <stdlib.h>     // Required for malloc
+#include <unistd.h>     // Required for sleep
+#include <pthread.h>    // Required for all pthread methods 
 
 void *thread_function(void *arg) {
     int *thread_num = (int *)arg;
-    printf("Thread %d is running.\n ", *thread_num);
+    printf("Thread %d is running.\n", *thread_num);
     int *t = malloc(sizeof(int)); 
     *t = rand()%5;
-    printf("Thread %d is sleeping for %d.\n ", *thread_num, *t);
+    printf("Thread %d is sleeping for %d.\n", *thread_num, *t);
     sleep(*t);
     // Perform thread tasks here
     return (void *)t;

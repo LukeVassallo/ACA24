@@ -1,5 +1,10 @@
 CC = gcc
 NUM_THREADS ?= 4
+# -Wall - Enables some extra warnings 
+# -Wextra - Enables additional warning flags
+# -03 - Code optimisation for performance set to highest level
+# -DNUM_THREADS=$(NUM_THREADS) - overrides NUM_THREADS pre-processor directives in .c files.
+# You can look up gcc documentation to learn more.
 CFLAGS = -Wall -Wextra -O3 -DNUM_THREADS=$(NUM_THREADS)
 LDFLAGS = -lpthread
 

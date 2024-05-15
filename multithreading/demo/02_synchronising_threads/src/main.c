@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+#include <stdio.h>      // Required for printf
+#include <stdlib.h>     // Required for malloc
+#include <pthread.h>    // Required for all pthread methods 
 
 #ifndef NUM_THREADS
 	#define NUM_THREADS 2
@@ -12,7 +12,7 @@ int shared_variable = 0; // Shared variable
 
 void *thread_function(void *arg) {
     int *thread_num = (int *)arg;
-    printf("Thread %d is running.\n ", *thread_num);
+    printf("Thread %d is running.\n", *thread_num);
 
     for (int i=0; i < 1e6; i++) {
         // lock the mutex before accessing the shared resource
@@ -21,7 +21,7 @@ void *thread_function(void *arg) {
         // critical section 
         shared_variable++; // Increment shared variable
         
-        if ( *thread_num == 0) break;
+        // if ( *thread_num == 0) break; // Intentionnally introduce a deadlock
         // Unlock mutex after accessing the shared resource
         pthread_mutex_unlock(&mutex);
     }
@@ -48,7 +48,7 @@ int main() {
     // Wait for threads to finish
     for (int i = 0; i < NUM_THREADS; i++) {
         pthread_join(threads[i], NULL);
-        printf("%d\n",i);
+        printf("Thread %d has returned.\n",i);
     }
 
     printf("Shared variable contains value %d.\n", shared_variable);

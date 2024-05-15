@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+#include <stdio.h>      // Required for printf
+#include <stdlib.h>     // Required for srand, rand
+#include <unistd.h>     // Required for sleep
+#include <pthread.h>    // Required for all pthread methods 
 
 void *thread_function(void *) {
     int t = rand()%5;
