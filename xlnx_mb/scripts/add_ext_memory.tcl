@@ -1,17 +1,14 @@
 if {[llength [get_bd_cells processing_system7_0]] == 0} {
-    puts "Cell does not exist."
-
+    puts "Cell does not exist. This should not have happened .."
     create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
-    set_property -dict [list \
-    CONFIG.PCW_UIPARAM_DDR_ENABLE {0} \
-    CONFIG.PCW_USE_M_AXI_GP0 {0} \
-    CONFIG.PCW_USE_S_AXI_HP0 {1} \
-    CONFIG.PCW_EN_CLK0_PORT {0} \
-    ] [get_bd_cells processing_system7_0]
+} 
 
-} else {
-    puts "Cell exists."
-}
+  set_property -dict [list \
+  CONFIG.PCW_UIPARAM_DDR_ENABLE {0} \
+  CONFIG.PCW_USE_M_AXI_GP0 {0} \
+  CONFIG.PCW_USE_S_AXI_HP0 {1} \
+  CONFIG.PCW_EN_CLK0_PORT {0} \
+  ] [get_bd_cells processing_system7_0]
 
 set_property -dict [list \
 CONFIG.PCW_UIPARAM_DDR_BOARD_DELAY0 {0.221}  \
@@ -56,14 +53,3 @@ connect_bd_net [get_bd_pins ext_memory/aclk] [get_bd_pins ext_memory/axi_protoco
 
 create_bd_pin -dir I ext_memory/aresetn
 connect_bd_net [get_bd_pins ext_memory/aresetn] [get_bd_pins ext_memory/axi_protocol_convert_0/aresetn]
-
-
-#create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DDR  
-#connect_bd_intf_net [get_bd_intf_pins processing_system7_0/DDR] [get_bd_intf_ports DDR]
-
-#create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
-#set_property -dict [list \
-#CONFIG.PCW_UIPARAM_DDR_ENABLE {0} \
-#CONFIG.PCW_USE_M_AXI_GP0 {0} \
-#CONFIG.PCW_EN_CLK0_PORT {0} \
-#] [get_bd_cells processing_system7_0]
